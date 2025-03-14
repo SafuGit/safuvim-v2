@@ -306,7 +306,8 @@ require("lazy").setup({
             opts = {
                 plugins = {
                     non_standalone = true,
-                }
+                },
+                lang = "python",
             },
             cmd = "Leet",
         },

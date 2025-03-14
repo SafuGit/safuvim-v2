@@ -30,7 +30,13 @@ local menu = Menu({
     Menu.item("Mason LSP"),
     Menu.item("Git GUI"),
     Menu.item("Open File Browser"),
-    Menu.item("Open Leetcode")
+    Menu.separator("Leetcode", {
+      char = "-",
+      text_align = "center",
+    }),
+    Menu.item("Open Leetcode"),
+    Menu.item("Test Leetcode Answer"),
+    Menu.item("Submit Leetcode Answer")
   },
   max_width = 20,
   keymap = {
@@ -79,6 +85,15 @@ local menu = Menu({
       vim.cmd("Telescope file_browser path=D:/Coding")
     end
 
+    if item.text == "Test Leetcode Answer" then
+      print("Test Leetcode Answer")
+      vim.cmd("Leet test")
+    end
+
+    if item.text == "Submit Leetcode Answer" then
+      print("Submit Leetcode Answer")
+      vim.cmd("Leet submit")
+    end
     if item.text == "Open Leetcode" then
       print("Open Leetcode")
       vim.cmd("Leet")
