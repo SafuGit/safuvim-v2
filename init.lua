@@ -446,11 +446,32 @@ wk.register({
 	["<C-m>"] = { ":luafile C:/Users/Safu/AppData/Local/nvim/lua/menu.lua<CR>", "Open Menu" },
 }, { mode = "n" })
 
+-- *nvim-cmp keybinds
+
 local cmp = require('cmp')
 
 wk.register({
-    ["<Tab>"] = {cmp.mapping.select_next_item(), "Select next item"},
-    ["`"] = {cmp.mapping.select_prev_item(), "Select previous item"},
-}, {mode = "i"})
+    ["<Tab>"] = {
+        function()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+            end
+        end,
+        "Select next item (if menu visible)",
+    },
+    ["`"] = {
+        function()
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("`", true, true, true), "n", true)
+            end
+        end,
+        "Select previous item (if menu visible)",
+    },
+}, { mode = "i" })
+
 
 vim.keymap.set("", "<C-z>", "<Nop>", { noremap = true, silent = true }) -- Disable suspend
