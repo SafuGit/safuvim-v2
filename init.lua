@@ -243,11 +243,41 @@ require("lazy").setup({
             cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
         },
 
-        {"https://git.sr.ht/~whynothugo/lsp_lines.nvim",}
+        {"https://git.sr.ht/~whynothugo/lsp_lines.nvim",},
+
+        {'lewis6991/gitsigns.nvim'},
+
+        {
+            'SuperBo/fugit2.nvim',
+            build = false,
+            opts = {
+              width = 100,
+	      height = "90%"
+            },
+            dependencies = {
+              'MunifTanjim/nui.nvim',
+              'nvim-tree/nvim-web-devicons',
+              'nvim-lua/plenary.nvim',
+              {
+                'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
+                dependencies = { 'stevearc/dressing.nvim' }
+              },
+            },
+            cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph' },
+            keys = {
+              { '<leader>F', mode = 'n', '<cmd>Fugit2<cr>' }
+            },
+        },
 	},
 
 	install = { colorscheme = { "github_dark_default" } },
 	checker = { enabled = true },
+})
+
+-- *GIT CONFIG
+require('gitsigns').setup({
+    current_line_blame = true,
+
 })
 
 -- *LSP CONFIG

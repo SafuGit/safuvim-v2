@@ -28,7 +28,7 @@ local menu = Menu({
     -- }),
     Menu.item("Focus Mode"),
     Menu.item("Mason LSP"),
-    Menu.item("Argon (Ar)"),
+    Menu.item("Git GUI"),
   },
   max_width = 20,
   keymap = {
@@ -61,6 +61,10 @@ local menu = Menu({
     if item.text == "Mason LSP" then
       print("Mason LSP")
       vim.cmd("Mason")
+    end
+    if item.text == "Git GUI" then
+      print("Git GUI")
+      vim.cmd("Fugit2")
     end
   end,
 })
