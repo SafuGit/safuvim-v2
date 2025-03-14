@@ -224,6 +224,7 @@ require("lazy").setup({
 						{ name = "nvim_lsp" },     -- Use LSP for completion
 						{ name = "buffer" },       -- Use buffer contents for completion
 						{ name = "path" },         -- Use filesystem paths for completion
+                        { name = "codeium" },
 					},
 				})
 			end,
@@ -268,16 +269,58 @@ require("lazy").setup({
               { '<leader>F', mode = 'n', '<cmd>Fugit2<cr>' }
             },
         },
+
+        -- Lua
+        {
+            "folke/zen-mode.nvim",
+            opts = {
+                on_open = function(win)
+                    vim.opt.laststatus = 0 -- Hide statusline
+                end,
+                on_close = function()
+                    vim.opt.laststatus = 3 -- Restore statusline
+                end
+            }
+        },
+
+        {
+            'windwp/nvim-autopairs',
+            event = "InsertEnter",
+            config = true
+            -- use opts = {} for passing setup options
+            -- this is equivalent to setup({}) function
+        },
+
+        {'wellle/context.vim'},
+
+        {'gennaro-tedesco/nvim-commaround'},
+
+        {
+            "kawre/leetcode.nvim",
+            dependencies = {
+                "nvim-telescope/telescope.nvim",
+                -- "ibhagwan/fzf-lua",
+                "nvim-lua/plenary.nvim",
+                "MunifTanjim/nui.nvim",
+            },
+            opts = {
+                plugins = {
+                    non_standalone = true,
+                }
+            },
+            cmd = "Leet",
+        },
 	},
 
 	install = { colorscheme = { "github_dark_default" } },
 	checker = { enabled = true },
 })
 
+vim.g.toggle_commaround = 'gcc'
+
 -- *GIT CONFIG
 require('gitsigns').setup({
     current_line_blame = true,
-
 })
 
 -- *LSP CONFIG

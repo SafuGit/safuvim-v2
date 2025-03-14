@@ -29,6 +29,8 @@ local menu = Menu({
     Menu.item("Focus Mode"),
     Menu.item("Mason LSP"),
     Menu.item("Git GUI"),
+    Menu.item("Open File Browser"),
+    Menu.item("Open Leetcode")
   },
   max_width = 20,
   keymap = {
@@ -56,7 +58,12 @@ local menu = Menu({
     end
     if item.text == "Focus Mode" then
       print("Focus Mode")
-      vim.cmd("Neotree close")
+      require("zen-mode").toggle({
+        window = {
+            width = .80,
+            height = 1,
+        }
+      })
     end
     if item.text == "Mason LSP" then
       print("Mason LSP")
@@ -65,6 +72,16 @@ local menu = Menu({
     if item.text == "Git GUI" then
       print("Git GUI")
       vim.cmd("Fugit2")
+    end
+
+    if item.text == "Open File Browser" then
+      print("Open File Browser")
+      vim.cmd("Telescope file_browser path=D:/Coding")
+    end
+
+    if item.text == "Open Leetcode" then
+      print("Open Leetcode")
+      vim.cmd("Leet")
     end
   end,
 })
