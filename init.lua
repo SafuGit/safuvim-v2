@@ -193,7 +193,7 @@ require("lazy").setup({
 			dependencies = { "neovim/nvim-lspconfig" },
 			config = function()
 				require("mason-lspconfig").setup({
-					ensure_installed = { "pyright", "tsserver", "lua_ls", "html" },     -- Add the LSPs you need
+					ensure_installed = { "pyright", "ts_ls", "lua_ls", "html", "rust_analyzer", "dockerls" },     -- Add the LSPs you need
 					automatic_installation = true,                                   -- Automatically install missing LSP servers
 				})
 			end,
@@ -206,8 +206,10 @@ require("lazy").setup({
 				-- mason-lspconfig will automatically configure these servers
 				require("lspconfig").html.setup({})
 				require("lspconfig").pyright.setup({})
-				require("lspconfig").tsserver.setup({})
+				require("lspconfig").ts_ls.setup({})
 				require("lspconfig").lua_ls.setup({})
+                require("lspconfig").rust_analyzer.setup({})
+                require("lspconfig").dockerls.setup({})
 			end,
 		},
 
@@ -234,46 +236,24 @@ require("lazy").setup({
 		},
 
         {
-            "HiPhish/rainbow-delimiters.nvim",
-            dependencies = { "nvim-treesitter/nvim-treesitter" },
-        },        
+            'aurum77/live-server.nvim',
+            build = function ()
+                require"live_server.util".install()
+            end,
+            cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
+        },
+
+        {"https://git.sr.ht/~whynothugo/lsp_lines.nvim",}
 	},
 
 	install = { colorscheme = { "github_dark_default" } },
 	checker = { enabled = true },
 })
 
--- *RAINBOW BRACKETS SECTION
-local rainbow_delimiters = require 'rainbow-delimiters'
-
-vim.g.rainbow_delimiters = {
-    strategy = {
-        [''] = rainbow_delimiters.strategy['global'],
-        vim = rainbow_delimiters.strategy['local'],
-    },
-    query = {
-        [''] = 'rainbow-delimiters',
-        lua = 'rainbow-blocks',
-    },
-    priority = {
-        [''] = 110,
-        lua = 210,
-    },
-    highlight = {
-        'RainbowDelimiterRed',
-        'RainbowDelimiterYellow',
-        'RainbowDelimiterBlue',
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterGreen',
-        'RainbowDelimiterViolet',
-        'RainbowDelimiterCyan',
-    },
-}
-
-
 -- *LSP CONFIG
+require("lsp_lines").setup()
 vim.diagnostic.config({
-    virtual_text = true,  -- Show inline diagnostics
+    virtual_text = false,  -- Show inline diagnostics
     signs = true,         -- Show signs in the gutter
     underline = true,     -- Underline the text with errors
     update_in_insert = false,  -- Disable updates while in insert mode for performance

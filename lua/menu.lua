@@ -27,7 +27,7 @@ local menu = Menu({
     --   text_align = "right",
     -- }),
     Menu.item("Focus Mode"),
-    Menu.item("Neon (Ne)"),
+    Menu.item("Mason LSP"),
     Menu.item("Argon (Ar)"),
   },
   max_width = 20,
@@ -57,6 +57,10 @@ local menu = Menu({
     if item.text == "Focus Mode" then
       print("Focus Mode")
       vim.cmd("Neotree close")
+    end
+    if item.text == "Mason LSP" then
+      print("Mason LSP")
+      vim.cmd("Mason")
     end
   end,
 })
