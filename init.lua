@@ -307,7 +307,7 @@ require("lazy").setup({
                 plugins = {
                     non_standalone = true,
                 },
-                lang = "python",
+                lang = "python3",
             },
             cmd = "Leet",
         },
@@ -316,6 +316,11 @@ require("lazy").setup({
 	install = { colorscheme = { "github_dark_default" } },
 	checker = { enabled = true },
 })
+
+-- *Some Vim Configs
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "number"
 
 vim.g.toggle_commaround = 'gcc'
 
